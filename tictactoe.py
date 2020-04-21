@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import array as arr
+import random
 
 GPIO.setmode(GPIO.BCM)
 # GPIO.setmode(GPIO.BOARD)
@@ -64,8 +65,9 @@ duty_lo = 8
 duty_hi = 100
 duty_hi2 = 50
 
-player = 'X'	# beginning player
-winner = ''		# winning player
+players = ['X', 'O']
+player = random.choice(players)	# beginning player
+winner = '' 	# initialize winning player
 turn_count = 1
 
 
@@ -128,6 +130,7 @@ def swapPlayer():
 	global player
 	global winner
 	if gameStatus():
+		# there is a winner!
 		winner = player
 	else:
 		if player == 'X':
@@ -190,7 +193,8 @@ def resetBoard():
 	
 	global player
 	if winner == '':
-		player = 'X'
+		print("Choosing random player to begin...")
+		player = random.choice(players)
 	else:
 		player = winner
 	global turn_count
@@ -201,7 +205,6 @@ def main():
 		GPIO.add_event_detect(x, GPIO.RISING, callback = buttonPressed, bouncetime = 300)
 
 	while (True):
-		resetBoard()		# begin with new game / empty board
 		printBoard()
 		new_game = False
 		sleep_time = 0.4
@@ -242,6 +245,7 @@ def main():
 			if turn_count == 10:	# TIE
 				break
 
+		global winner
 		if gameStatus():
 			if winner == 'X':
 				print("Player X Wins!")
@@ -264,10 +268,12 @@ def main():
 			indicate_R()
 			for x in range(0, 9):
 				pwm_leds[x].ChangeDutyCycle(duty_hi)
+			winner = ''
 		
 		new_game = True
 		print("Starting new game!")
 		sleep(5)
+		resetBoard()		# begin with new game / empty board
 
 
 def destroy():
