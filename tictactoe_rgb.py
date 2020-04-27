@@ -15,9 +15,9 @@ led_0 = 10
 led_3 = 9
 led_6 = 11
 
-led_1 = 13
-led_4 = 19
-led_7 = 26
+led_1 = 23
+led_4 = 24
+led_7 = 25
 
 led_2 = 16
 led_5 = 20
@@ -30,9 +30,9 @@ buttonL = 17
 buttonR = 15
 
 # RGB player indicator
-r = 25
-g = 24
-b = 23
+r = 26
+g = 19
+b = 13
 
 push_btns = [buttonPlay, buttonU, buttonD, buttonL, buttonR]
 rgb = [r, g, b]
