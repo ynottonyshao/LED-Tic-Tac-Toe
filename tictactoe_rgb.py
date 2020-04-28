@@ -57,8 +57,14 @@ for x in range(0, 9):
 	else:
 		pwm_leds[count].start(0)	# turn everything else off
 	count += 1
+
 for color in rgb:
 	GPIO.setup(color, GPIO.OUT)
+
+pwm_rgb = []
+for y in range(0, 3):
+	pwm_rgb.append(GPIO.PWM(rgb[y], 50))
+	pwm_rgb[y].start(0)
 
 duty_off = 0
 duty_lo = 8
@@ -101,21 +107,30 @@ def gameStatus():
 
 def indicate_R():
 	# TIE
-	GPIO.output(26, True)
-	GPIO.output(19, False)
-	GPIO.output(13, False)
+	# GPIO.output(26, True)
+	# GPIO.output(19, False)
+	# GPIO.output(13, False)
+	pwm_rgb[0].ChangeDutyCycle(duty_lo)
+	pwm_rgb[1].ChangeDutyCycle(duty_off)
+	pwm_rgb[2].ChangeDutyCycle(duty_off)
 
 def indicate_G():
 	# player X
-	GPIO.output(26, False)
-	GPIO.output(19, True)
-	GPIO.output(13, False)
+	# GPIO.output(26, False)
+	# GPIO.output(19, True)
+	# GPIO.output(13, False)
+	pwm_rgb[0].ChangeDutyCycle(duty_off)
+	pwm_rgb[1].ChangeDutyCycle(duty_lo)
+	pwm_rgb[2].ChangeDutyCycle(duty_off)
 
 def indicate_B():
 	# player O
-	GPIO.output(26, False)
-	GPIO.output(19, False)
-	GPIO.output(13, True)
+	# GPIO.output(26, False)
+	# GPIO.output(19, False)
+	# GPIO.output(13, True)
+	pwm_rgb[0].ChangeDutyCycle(duty_off)
+	pwm_rgb[1].ChangeDutyCycle(duty_off)
+	pwm_rgb[2].ChangeDutyCycle(duty_lo)
 	
 
 def swapPlayer():
@@ -207,7 +222,7 @@ def main():
 	while (True):
 		printBoard()
 		new_game = False
-		sleep_time = 0.3
+		sleep_time = 0.4
 		while (not new_game):
 			if player == 'X':
 				indicate_G()
