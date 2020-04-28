@@ -101,21 +101,21 @@ def gameStatus():
 
 def indicate_R():
 	# TIE
-	GPIO.output(25, True)
-	GPIO.output(24, False)
-	GPIO.output(23, False)
+	GPIO.output(26, True)
+	GPIO.output(19, False)
+	GPIO.output(13, False)
 
 def indicate_G():
 	# player X
-	GPIO.output(25, False)
-	GPIO.output(24, True)
-	GPIO.output(23, False)
+	GPIO.output(26, False)
+	GPIO.output(19, True)
+	GPIO.output(13, False)
 
 def indicate_B():
 	# player O
-	GPIO.output(25, False)
-	GPIO.output(24, False)
-	GPIO.output(23, True)
+	GPIO.output(26, False)
+	GPIO.output(19, False)
+	GPIO.output(13, True)
 	
 
 def swapPlayer():
@@ -207,7 +207,7 @@ def main():
 	while (True):
 		printBoard()
 		new_game = False
-		sleep_time = 0.4
+		sleep_time = 0.3
 		while (not new_game):
 			if player == 'X':
 				indicate_G()
@@ -272,7 +272,7 @@ def main():
 		
 		new_game = True
 		print("Starting new game!")
-		sleep(5)
+		sleep(3)
 		resetBoard()		# begin with new game / empty board
 
 
