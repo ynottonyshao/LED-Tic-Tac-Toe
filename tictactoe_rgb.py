@@ -107,27 +107,18 @@ def gameStatus():
 
 def indicate_R():
 	# TIE
-	# GPIO.output(26, True)
-	# GPIO.output(19, False)
-	# GPIO.output(13, False)
 	pwm_rgb[0].ChangeDutyCycle(duty_lo)
 	pwm_rgb[1].ChangeDutyCycle(duty_off)
 	pwm_rgb[2].ChangeDutyCycle(duty_off)
 
 def indicate_G():
 	# player X
-	# GPIO.output(26, False)
-	# GPIO.output(19, True)
-	# GPIO.output(13, False)
 	pwm_rgb[0].ChangeDutyCycle(duty_off)
 	pwm_rgb[1].ChangeDutyCycle(duty_lo)
 	pwm_rgb[2].ChangeDutyCycle(duty_off)
 
 def indicate_B():
 	# player O
-	# GPIO.output(26, False)
-	# GPIO.output(19, False)
-	# GPIO.output(13, True)
 	pwm_rgb[0].ChangeDutyCycle(duty_off)
 	pwm_rgb[1].ChangeDutyCycle(duty_off)
 	pwm_rgb[2].ChangeDutyCycle(duty_lo)
