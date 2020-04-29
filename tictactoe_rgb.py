@@ -285,7 +285,10 @@ def main():
 def destroy():
 	for x in range(0, 9):
 		pwm_leds[x].stop()
-	
+
+	for y in range(0, 3):
+		pwm_rgb[y].stop()
+
 	print("Cleaning up GPIO...")
 
 if __name__ == '__main__':
